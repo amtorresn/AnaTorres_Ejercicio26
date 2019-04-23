@@ -81,7 +81,7 @@ void rk4(int n, double y0, double z0, double delta, double w, string filename){
         fprom_y = f0_y/6 + f1_y/3 + f2_y/3 + f3_y/6;
         
         z += delta*fprom_z;
-        y += delta*z;
+        y += delta*z_n;
         x += delta;
         outfile << x << " " << y << " " << z << endl;
     }
