@@ -15,9 +15,9 @@ void rk4(int n, double y0, double z0, double delta, double w, string filename);
 
 int main(){
     
- explicit_Euler(200, 1, 0, 0.1, 1, "ex_01.dat");
- explicit_Euler(200, 1, 0, 0.01, 1, "ex_001.dat");
- explicit_Euler(200, 1, 0, 1, 1, "ex_1.dat");
+ explicit_Euler(200, 1, 0, 0.1, 1, "exp_01.dat");
+ explicit_Euler(200, 1, 0, 0.01, 1, "exp_001.dat");
+ explicit_Euler(200, 1, 0, 1, 1, "exp_1.dat");
  return 0;   
 }
 
@@ -34,10 +34,10 @@ void explicit_Euler(int n, double y0, double z0, double delta, double w, string 
     outfile.open(filename);
     
 //     cout << "explicit" << endl;
-    for (int i = 0; i < n; i++){
+    while(x<30){
         z_n = z;
         z += delta*(-w*w*y);
-        y -= delta*z_n;
+        y += delta*z_n;
         x += delta;
         outfile << x << " " << y << " " << z << endl;
     }
