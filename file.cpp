@@ -9,34 +9,42 @@ using std::cout;
 using std::endl;
 
 
-void explicit_Euler(int ti, int tf, double delta, double w, string filename);
-void rk4(int ti, int tf, double delta, double w, string filename);
-// void leap_frog(int ti, int tf, double delta, double w, string filename);
+void explicit_Euler(int xi, int xf, double delta, double w, string filename);
+void rk4(int xi, int xf, double delta, double w, string filename);
+void leap_frog(int xi, int xf, double delta, double w, string filename);
 
+// float dzdx(float x, float y, float z, float omega);
+// float dydx(float x, float y, float z, float omega);
 
 int main(){
     
     float omega = 1.0;
     explicit_Euler(0.0, 10000.0, omega/2, omega, "euler.dat");
     rk4(0.0, 10000.0, omega/2, omega, "rk4.dat");
-//     void leap_frog(0.0, 10000.0, omega/2, omega, "frog.dat");
+    leap_frog(0.0, 10000.0, omega/2, omega, "frog.dat");
     
- return 0;   
+    return 0;   
 }
 
+// float dzdx(float x, float y, float z, float omega){
+//     return omega*(-omega*omega*y)/2
+// }
+
+// float dydx(float x, float y, float z, float omega){
+// }
 
 
-void explicit_Euler(int ti, int tf, double delta, double w, string filename){
+void explicit_Euler(int xi, int xf, double delta, double w, string filename){
     
     double y = 1;
-    double x = ti;
+    double x = xi;
     double z = 0;
     double z_n = 0;
     
     ofstream outfile;
     outfile.open(filename);
     
-    while(x<tf){
+    while(x<xf){
         z_n = z;
         z += delta*(-w*w*y);
         y += delta*z_n;
@@ -47,9 +55,9 @@ void explicit_Euler(int ti, int tf, double delta, double w, string filename){
 }
 
 
-void rk4(int ti, int tf, double delta, double w, string filename){
+void rk4(int xi, int xf, double delta, double w, string filename){
     
-    double y = 1; double x = ti; double z = 0;
+    double y = 1; double x = xi; double z = 0;
     double z_n = 0;
     double y_new = 0; double z_new = 0;
     double f0_z = 0; double f0_y = 0;
@@ -62,7 +70,7 @@ void rk4(int ti, int tf, double delta, double w, string filename){
     outfile.open(filename);
     
     
-    while(x<tf){
+    while(x<xf){
         
         z_n = z;
         f0_z = delta*(-w*w*y);
@@ -96,5 +104,37 @@ void rk4(int ti, int tf, double delta, double w, string filename){
     }
     outfile.close();
     
+}
+
+void leap_frog(int xi, int xf, double delta, double w, string filename){
+    
+    double y = 1;
+    double x = xi;
+    double z = 0;
+//     double z_n = 0;
+//     double z_n1 = 0;
+    double y_1 = 0;
+    double z_12 = 0;
+    double z_32 = 0;
+    
+    ofstream outfile;
+    outfile.open(filename);
+    
+    y_1 = y + (-w*w*y)*delta/2;
+    
+    while(x<xf){
+//         z_n = z;
+//         y_1 = y;
+        z_12 = delta*(-w*w*y_1)/2;
+        y_1 += (z_12)*delta;
+        
+        z_32 = z_12 + 2*(-w*w*y_1)*delta;
+        
+//         z += delta*(-w*w*y);
+//         y += delta*z_n1;
+        x += delta;
+        outfile << x << " " << y_1 << " " << z_12 << endl;
+    }
+    outfile.close();
     
 }
