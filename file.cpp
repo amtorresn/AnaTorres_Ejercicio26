@@ -13,8 +13,6 @@ void explicit_Euler(int xi, int xf, double delta, double w, string filename);
 void rk4(int xi, int xf, double delta, double w, string filename);
 void leap_frog(int xi, int xf, double delta, double w, string filename);
 
-// float dzdx(float x, float y, float z, float omega);
-// float dydx(float x, float y, float z, float omega);
 
 int main(){
     
@@ -25,14 +23,6 @@ int main(){
     
     return 0;   
 }
-
-// float dzdx(float x, float y, float z, float omega){
-//     return omega*(-omega*omega*y)/2
-// }
-
-// float dydx(float x, float y, float z, float omega){
-// }
-
 
 void explicit_Euler(int xi, int xf, double delta, double w, string filename){
     
@@ -111,29 +101,18 @@ void leap_frog(int xi, int xf, double delta, double w, string filename){
     double y = 1;
     double x = xi;
     double z = 0;
-//     double z_n = 0;
-//     double z_n1 = 0;
-    double y_1 = 0;
-    double z_12 = 0;
-    double z_32 = 0;
     
     ofstream outfile;
     outfile.open(filename);
     
-    y_1 = y + (-w*w*y)*delta/2;
-    
     while(x<xf){
-//         z_n = z;
-//         y_1 = y;
-        z_12 = delta*(-w*w*y_1)/2;
-        y_1 += (z_12)*delta;
         
-        z_32 = z_12 + 2*(-w*w*y_1)*delta;
+        z += (-w*w*y)*delta/2;
+        y += z*delta;
+        z += (-w*w*y)*delta/2;
         
-//         z += delta*(-w*w*y);
-//         y += delta*z_n1;
         x += delta;
-        outfile << x << " " << y_1 << " " << z_12 << endl;
+        outfile << x << " " << y << " " << z << endl;
     }
     outfile.close();
     
