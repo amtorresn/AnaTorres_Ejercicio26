@@ -17,9 +17,9 @@ void rk4(int ti, int tf, double delta, double w, string filename);
 int main(){
     
     float omega = 1.0;
-    explicit_Euler(0, 400, omega/2, omega, "euler.dat");
-    rk4(0, 400, omega/2, omega, "rk4.dat");
-//     void leap_frog(0, 400, omega/2, omega, "frog.dat");
+    explicit_Euler(0.0, 10000.0, omega/2, omega, "euler.dat");
+    rk4(0.0, 10000.0, omega/2, omega, "rk4.dat");
+//     void leap_frog(0.0, 10000.0, omega/2, omega, "frog.dat");
     
  return 0;   
 }
