@@ -35,11 +35,12 @@ void explicit_Euler(int xi, int xf, double delta, double w, string filename){
     outfile.open(filename);
     
     while(x<xf){
+        outfile << x << " " << y << " " << z << endl;
         z_n = z;
         z += delta*(-w*w*y);
         y += delta*z_n;
         x += delta;
-        outfile << x << " " << y << " " << z << endl;
+        
     }
     outfile.close();
 }
@@ -62,6 +63,7 @@ void rk4(int xi, int xf, double delta, double w, string filename){
     
     while(x<xf){
         
+        outfile << x << " " << y << " " << z << endl;
         z_n = z;
         f0_z = delta*(-w*w*y);
         f0_y = delta*z_n;
@@ -90,7 +92,7 @@ void rk4(int xi, int xf, double delta, double w, string filename){
         z += fprom_z;
         y += fprom_y;
         x += delta;
-        outfile << x << " " << y << " " << z << endl;
+        
     }
     outfile.close();
     
@@ -107,12 +109,13 @@ void leap_frog(int xi, int xf, double delta, double w, string filename){
     
     while(x<xf){
         
+        outfile << x << " " << y << " " << z << endl;
         z += (-w*w*y)*delta/2;
         y += z*delta;
         z += (-w*w*y)*delta/2;
         
         x += delta;
-        outfile << x << " " << y << " " << z << endl;
+        
     }
     outfile.close();
     
