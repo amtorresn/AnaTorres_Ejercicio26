@@ -9,35 +9,34 @@ using std::cout;
 using std::endl;
 
 
-void explicit_Euler(int n, double y0, double z0, double delta, double w, string filename);
-void rk4(int n, double y0, double z0, double delta, double w, string filename);
+void explicit_Euler(int ti, int tf, double delta, double w, string filename);
+void rk4(int ti, int tf, double delta, double w, string filename);
+// void leap_frog(int ti, int tf, double delta, double w, string filename);
 
 
 int main(){
     
-    explicit_Euler(400, 1, 0, 0.1, 1, "exp_01.dat");
-    explicit_Euler(400, 1, 0, 0.01, 1, "exp_001.dat");
-    explicit_Euler(400, 1, 0, 1, 1, "exp_1.dat");
-    rk4(400, 1, 0, 0.1, 1, "rk_01.dat");
-    rk4(400, 1, 0, 0.01, 1, "rk_001.dat");
-    rk4(400, 1, 0, 1, 1, "rk_1.dat");
+    float omega = 1.0;
+    explicit_Euler(0, 400, omega/2, omega, "euler.dat");
+    rk4(0, 400, omega/2, omega, "rk4.dat");
+//     void leap_frog(0, 400, omega/2, omega, "frog.dat");
     
  return 0;   
 }
 
 
 
-void explicit_Euler(int n, double y0, double z0, double delta, double w, string filename){
+void explicit_Euler(int ti, int tf, double delta, double w, string filename){
     
-    double y = y0;
-    double x = 0;
-    double z = z0;
+    double y = 1;
+    double x = ti;
+    double z = 0;
     double z_n = 0;
     
     ofstream outfile;
     outfile.open(filename);
     
-    while(x<30){
+    while(x<tf){
         z_n = z;
         z += delta*(-w*w*y);
         y += delta*z_n;
@@ -48,9 +47,9 @@ void explicit_Euler(int n, double y0, double z0, double delta, double w, string 
 }
 
 
-void rk4(int n, double y0, double z0, double delta, double w, string filename){
+void rk4(int ti, int tf, double delta, double w, string filename){
     
-    double y = y0; double x = 0; double z = z0;
+    double y = 1; double x = ti; double z = 0;
     double z_n = 0;
     double y_new = 0; double z_new = 0;
     double f0_z = 0; double f0_y = 0;
@@ -63,7 +62,7 @@ void rk4(int n, double y0, double z0, double delta, double w, string filename){
     outfile.open(filename);
     
     
-    while(x<30){
+    while(x<tf){
         
         z_n = z;
         f0_z = delta*(-w*w*y);

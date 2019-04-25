@@ -1,7 +1,7 @@
-fig.png fig2.png: %.dat
+fig.png: %.dat
 	python plot.py 
     
-all: exp_01.dat exp_001.dat exp_1.dat rk_01.dat rk_001.dat rk_1.dat
+all: euler.dat rk4.dat frog.dat
 
 %.dat: file.x
 	./file.x

@@ -1,92 +1,86 @@
 import numpy as np
 import matplotlib.pyplot as plt
+data_euler = np.loadtxt("euler.dat")
+data_rk4 = np.loadtxt("rk4.dat")
+# data_frog = np.loadtxt("frog.dat")
 
 
-data_01 = np.loadtxt("exp_01.dat")
-data_001 = np.loadtxt("exp_001.dat")
-data_1 = np.loadtxt("exp_1.dat")
+plt.figure(figsize=(12,12))
 
 
-plt.figure(figsize=(15,15))
+
+
+
+plt.subplot(3,3,1)
+plt.xlabel("Time")
+plt.ylabel("Position")
+plt.ylim((-1.5,1.5))
+plt.xlim((0,15))
+plt.plot(data_euler[:,0], data_euler[:,1])
 plt.title("Euler")
 
-plt.subplot(3,3,1)
-plt.title("$y$ vs $x$, 0.1")
-plt.plot(data_01[:,0], data_01[:,1])
-plt.subplot(3,3,2)
-plt.title("$y$ vs $x$, 0.01")
-plt.plot(data_001[:,0], data_001[:,1])
-plt.subplot(3,3,3)
-plt.title("$y$ vs $x$, 1")
-plt.plot(data_1[:,0], data_1[:,1])
 
+
+plt.subplot(3,3,2)
+plt.xlabel("Time")
+# plt.ylabel("Position")
+plt.ylim((-1.5,1.5))
+plt.xlim((0,15))
+plt.plot(data_rk4[:,0], data_rk4[:,1])
+plt.title("RK")
+
+
+
+
+# plt.subplot(3,3,3)
+# plt.xlabel("Time")
+## plt.ylabel("Position")
+# plt.ylim((-1.5,1.5))
+# plt.xlim((0,15))
+# plt.plot(data_frog[:,0], data_frog[:,1])
+# plt.title("Leap Frog")
 
 plt.subplot(3,3,4)
-plt.title("$dy/dx$ vs $x$, 0.1")
-plt.plot(data_01[:,0], data_01[:,2])
+plt.xlabel("Time")
+plt.ylabel("Velocity")
+plt.ylim((-1.5,1.5))
+plt.xlim((0,15))
+plt.plot(data_euler[:,0], data_euler[:,2])
+
 plt.subplot(3,3,5)
-plt.title("$dy/dx$ vs $x$, 0.01")
-plt.plot(data_001[:,0], data_001[:,2])
-plt.subplot(3,3,6)
-plt.title("$dy/dx$ vs $x$, 1")
-plt.plot(data_1[:,0], data_1[:,2])
+plt.xlabel("Time")
+# plt.ylabel("Velocity")
+plt.ylim((-1.5,1.5))
+plt.xlim((0,15))
+plt.plot(data_rk4[:,0], data_rk4[:,2])
+
+# plt.subplot(3,3,6)
+# plt.xlabel("Time")
+## plt.ylabel("Velocity")
+# plt.ylim((-1.5,1.5))
+# plt.xlim((0,15))
+# plt.plot(data_frog[:,0], data_frog[:,2])
 
 
 plt.subplot(3,3,7)
-plt.title("$dy/dx$ vs $y$, 0.1")
-plt.plot(data_01[:,1], data_01[:,2])
-plt.subplot(3,3,8)
-plt.title("$dy/dx$ vs $y$, 0.01")
-plt.plot(data_001[:,1], data_001[:,2])
-plt.subplot(3,3,9)
-plt.title("$dy/dx$ vs $y$, 1")
-plt.plot(data_1[:,1], data_1[:,2])
+plt.xlabel("Time")
+plt.ylabel("Velocity")
+plt.ylim((-2,2))
+plt.xlim((-2,2))
+plt.plot(data_euler[:,1], data_euler[:,2])
 
+plt.subplot(3,3,8)
+plt.xlabel("Time")
+# plt.ylabel("Velocity")
+plt.ylim((-2,2))
+plt.xlim((-2,2))
+plt.plot(data_rk4[:,1], data_rk4[:,2])
+
+# plt.subplot(3,3,9)
+# plt.xlabel("Time")
+## plt.ylabel("Velocity")
+# plt.ylim((-2,2))
+# plt.xlim((-2,2))
+# plt.plot(data_frog[:,1], data_frog[:,2])
 
 plt.savefig("fig.png")
-
-
-
-
-data2_01 = np.loadtxt("rk_01.dat")
-data2_001 = np.loadtxt("rk_001.dat")
-data2_1 = np.loadtxt("rk_1.dat")
-
-
-plt.figure(figsize=(15,15))
-plt.title("Rk4")
-
-plt.subplot(3,3,1)
-plt.title("$y$ vs $x$, 0.1")
-plt.plot(data2_01[:,0], data2_01[:,1])
-plt.subplot(3,3,2)
-plt.title("$y$ vs $x$, 0.01")
-plt.plot(data2_001[:,0], data2_001[:,1])
-plt.subplot(3,3,3)
-plt.title("$y$ vs $x$, 1")
-plt.plot(data2_1[:,0], data2_1[:,1])
-
-
-plt.subplot(3,3,4)
-plt.title("$dy/dx$ vs $x$, 0.1")
-plt.plot(data2_01[:,0], data2_01[:,2])
-plt.subplot(3,3,5)
-plt.title("$dy/dx$ vs $x$, 0.01")
-plt.plot(data2_001[:,0], data2_001[:,2])
-plt.subplot(3,3,6)
-plt.title("$dy/dx$ vs $x$, 1")
-plt.plot(data2_1[:,0], data2_1[:,2])
-
-
-plt.subplot(3,3,7)
-plt.title("$dy/dx$ vs $y$, 0.1")
-plt.plot(data2_01[:,1], data2_01[:,2])
-plt.subplot(3,3,8)
-plt.title("$dy/dx$ vs $y$, 0.01")
-plt.plot(data2_001[:,1], data2_001[:,2])
-plt.subplot(3,3,9)
-plt.title("$dy/dx$ vs $y$, 1")
-plt.plot(data2_1[:,1], data2_1[:,2])
-
-
-plt.savefig("fig2.png")
